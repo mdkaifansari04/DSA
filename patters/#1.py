@@ -4,5 +4,5 @@
 # ****
 def printPattern(n):
     for i in range(n):
-        print("* "*4)
-printPattern(4)
+        print("* "*n)
+printPattern(10)
