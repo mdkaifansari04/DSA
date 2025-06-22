@@ -19,7 +19,5 @@ int main()
 {
     char c = 'z';
     string s = "asjanskkaiasmlwmiixkkalaksz";
-
-
     cout << "Character present :" << checkNumberOfChar(c,s) << endl;;
 }

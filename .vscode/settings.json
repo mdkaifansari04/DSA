@@ -8,6 +8,7 @@
     "string_view": "cpp",
     "variant": "cpp",
     "vector": "cpp",
-    "memory": "cpp"
+    "memory": "cpp",
+    "map": "cpp"
   }
 }
