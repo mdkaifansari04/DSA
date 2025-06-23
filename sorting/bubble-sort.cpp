@@ -4,7 +4,7 @@ using namespace std;
 void bubbleSort(int arr[], int size){
     int pos=0;
     while(pos<size){
-        for (int i=0; i<size-pos; i++){
+        for (int i=0; i<size-pos-1; i++){
             if(arr[i] > arr[i+1]){
                 swap(arr[i], arr[i+1]);
             }
@@ -21,5 +21,4 @@ int main(){
     for (int i=0; i<size; i++){
         cout << arr[i] << " ";
     }
-
  }
