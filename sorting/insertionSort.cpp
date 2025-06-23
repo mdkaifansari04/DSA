@@ -11,7 +11,6 @@ void insertionSort(int arr[], int size){
     }
 }
 int main(){
-
     int arr [] = {12,34,4,6,1, 100,89, 23,4, 9};
     int size = 10;
     insertionSort(arr,size);
