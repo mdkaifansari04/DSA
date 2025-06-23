@@ -1,6 +1,8 @@
 #include<iostream>
 using namespace std;
 
+// what is hashing : Hasing is the way of counting the elements an array contains. ( the number of elements does the )
+
 int checkNumberOfChar(char c, string s){
     int hashLimit = 26;
     int hashArr[hashLimit];
