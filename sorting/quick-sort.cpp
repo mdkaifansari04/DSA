@@ -2,7 +2,6 @@
 using namespace std;
 
 // my implementation
-
 void quickSort(int arr[],int low, int high){
     int i=low;
     int j=high;
