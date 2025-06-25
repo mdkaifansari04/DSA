@@ -1,23 +1,14 @@
 #include<iostream>
 using namespace std;
 
-/*
-Merge sort: it is the method where we divide the array and merge it in term of sorted order. 
-
-step 1: first we call recursive to the same fn for dividing and having a base condition as (when low == high then return)
-step 2: after both the arrays are splited and merge with checking the highest and lowest element after it. (this way a that splited part will get sorted and so on for others too)
-step 3: the merge fn have a temp array which basically have the sorted array of two un-sorted array, 
-
-TIME COMPLEXITY : O[ N x Log n (base 2) ] as N is divided mutiple times by 2. 
-*/
-
 void merge(int arr[], int low, int mid , int high){
     int left = low;
     int right = mid+1;
     vector<int> temp;
 
     while(left <= mid && right<=high){
-        if(arr[left]<arr[right]){
+// only here the sign will be changed to "<" (smaller then) to ">" (greater then)
+        if(arr[left]>arr[right]){
             temp.push_back(arr[left]);
             left++;   
         }
