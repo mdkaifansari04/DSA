@@ -6,7 +6,7 @@ void merge(int arr[], int low, int mid, int high){
     int j = mid+1;
     vector<int> temp;
 
-    while(i<=mid && mid<=high){
+    while(i<=mid && j<=high){
         if(arr[i]<arr[j]){
             temp.push_back(arr[i]);
             i++;
@@ -33,6 +33,7 @@ void ms(int arr[], int low,int high ){
     merge(arr, low, mid, high);
 }
 
+// time complexity : O(N log N)
 void secondLargestBrute (int arr[], int size){
     // pass 1: sorting the element and finding the largest number
     ms(arr, 0, size-1);
@@ -50,7 +51,7 @@ void secondLargestBrute (int arr[], int size){
 
 }
 
-
+// time complexity : O(2N)
 void secondLargestBetter (int arr[], int size){
     int largest = arr[0];
 
@@ -65,13 +66,32 @@ void secondLargestBetter (int arr[], int size){
     cout<<"Largest : "<<largest << endl;
     cout<<"Second Largest :" << secondLargest << endl;
 }
+// time complexity : O(N)
+void secondLargestOptimal (int arr[], int size){
 
+    int largest = arr[0];
+    int secondLargest = -1;
+
+    for(int i=0; i<size; i++){
+        if(arr[i]>largest){
+            secondLargest = largest;
+            largest = arr[i];
+        }
+        if(arr[i]<largest && arr[i]>secondLargest){
+            secondLargest = arr[i];
+        }
+    }
+
+    cout<<"Largest : "<<largest << endl;
+    cout<<"Second Largest :" << secondLargest << endl;
+}
 int main(){
-    int arr[] = {1,23,5,67,100};
+    int arr[] = {10000,23,5,67,100};
     int size = sizeof(arr) / sizeof(arr[0]);
 
     // secondLargestBrute(arr, size);s
-    secondLargestBetter(arr, size);
+    // secondLargestBetter(arr, size);
+        secondLargestOptimal(arr, size);
 
 }
 
