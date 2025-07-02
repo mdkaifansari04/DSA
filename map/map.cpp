@@ -11,7 +11,6 @@ void checkChar(char c, string s){
             mpp[c]++;
         }
     }
-
     cout  << c << " char available : " << mpp[c];
 
 }
