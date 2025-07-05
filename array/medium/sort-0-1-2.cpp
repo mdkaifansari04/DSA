@@ -62,12 +62,15 @@ void sortArrBrute(vector<int> &nums){
 // as we dont have an actual array we need to make a low pointer as low =0;
 // and we will be sorting the array based on swap technique and it will be done
 
+// time complexity : O(n)
+// space complexity : O(1)
+
 void sortBetter (vector<int> &nums){
     int n = nums.size();
     int mid = 0, high=n-1, low=0;
 
     // if the mid crosses the high, means we are done with the sorting technique.
-    while(mid < high){
+    while(mid <= high){
         // we check if the element is equal to 0, if yes then swap it wil low, 
         //which is pointing to the index 0 and mid is also having the same so same number get swapped by one another
         // and increment the mid++ (as we need to sort others as well) 
