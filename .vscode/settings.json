@@ -10,6 +10,7 @@
     "vector": "cpp",
     "memory": "cpp",
     "map": "cpp",
-    "ios": "cpp"
+    "ios": "cpp",
+    "unordered_map": "cpp"
   }
 }

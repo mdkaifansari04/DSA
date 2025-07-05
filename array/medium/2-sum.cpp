@@ -1,4 +1,6 @@
 #include<iostream>
+#include<map>
+#include<algorithm>
 using namespace std;
 
 // brute
@@ -50,6 +52,9 @@ int maxElement (vector<int> &nums){
     }
     return max;
 }
+
+//using hashArray in order to the element if this is present.
+// implemented it by my own.
 bool exitsTwoSumBetter2(vector<int> &nums, int k){
     int n = nums.size()+1;
     vector<int> hashArr(maxElement(nums)+1, 0);
@@ -68,9 +73,81 @@ bool exitsTwoSumBetter2(vector<int> &nums, int k){
     return false;
 }
 
+// implemented using hashmap, just checking if the subtraction of the k with nums[i] exits in map then we can have a two sum
+// time complexity for unordered map we have : O(Nxlogn) and O(n sq) [for worst case]
+// space complexity : O(n)
+bool exitsTwoSumBetter3(vector<int> &nums, int k){
+    int n= nums.size();
+    unordered_map<long long, int>hashmap;
+
+    for (int i=0; i<n; i++){
+        if(hashmap.find(k-nums[i]) != hashmap.end()){
+            return true;
+        }else{
+            hashmap.insert({nums[i], i});
+        }
+    }
+
+    return false;
+}
+
+void sortArr(vector<int> &nums){
+
+}
+
+    // implemented greedy approach using two pointers : 
+    // step 1: sort the array 
+    // step 2: put i at first and j at last
+    // step 3: check if the sum of element is equal then return true
+    // step 4: if the element is greater then decrement the j
+    // step 5: if the element is lesser then increment the i
+    // step 6: if the none of the element has the sum as equal as k then return false;
+
+    // time complexity : O(n log n) + O(n) == O(n log n) [as it dominates everything]
+    // space complexity : O(1)
+
+    bool existTwoSumOptimal (vector<int> &nums, int k){ 
+        int n=nums.size();
+        int i=0;
+        int j=n-1;
+        
+        sort(nums.begin(), nums.end());
+        while (i<j)
+        {
+            int sum = nums[i] + nums[j];
+            if(sum == k) {
+                return true;
+            }else if(sum > k){
+                j--;
+            }else{
+                i++;
+            }
+        }
+        return false;
+    }
+
+
+vector<int> twoSum(vector<int>& nums, int target) {
+    int n=nums.size();  
+    vector<int> temp;
+    unordered_map<long long, int> hashmap;
+    for(int i=0; i<n; i++){
+        int sub = target-nums[i];
+        if(hashmap.find(sub) != hashmap.end()){
+            temp.push_back(hashmap[sub]);
+            temp.push_back(i);
+            break;
+        }else{
+            hashmap.insert({sub, i});
+        }
+    }
+    return temp;
+}
+
+
 int main(){ 
     vector<int>arr={2,7,11,15};
     // bool result = exitsTwoSumBetter(arr, 22);
-    bool result = exitsTwoSumBetter2(arr, 25);
-    cout << result;
+    vector<int> result = twoSum(arr, 9);
+    for(auto i:result) cout << i << " ";
 }
