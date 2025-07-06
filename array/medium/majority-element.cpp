@@ -44,7 +44,6 @@ int getMajorityElement(vector<int> &nums){
     for(int i=0;i<n;i++){
         if(count == 0){
             ele = nums[i];
-            count++;
         }
         if(nums[i] == ele){
             count++;
