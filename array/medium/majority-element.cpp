@@ -51,7 +51,16 @@ int getMajorityElement(vector<int> &nums){
             count--;
         }
     }
-    return ele;
+
+    // also do an extra check of the number of count of that element we got is the highest and greater then n/2
+
+    int count2=0;
+
+    for(int i=0; i<n; i++){
+        if(nums[i] == ele) count2++;
+    }
+
+    return (count2 > (n/2)) ? ele : -1;
 }
 
 int main(){ 
