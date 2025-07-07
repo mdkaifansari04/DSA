@@ -64,8 +64,37 @@ int maximumSubArraySumOptimal(vector<int>&nums){
     return maximumSum;
 }
 
+vector<int> maximumSubArraySumOptimalArray(vector<int>&nums){
+    int n=nums.size();
+    int maximumSum=0;
+    int sum=0;
+    int ansStart = 0;
+    int ansEnd =0;
+    int start;
+    // for each iteration we will add the sum with the number, we know we have negative as well, 
+    // for each sum we check the condition of whether it is negative set it to zero
+    // if the sum is greater then max, then add that up.
+    for(int i=0;i<n;i++){
+        if(sum ==0) start = i;
+
+        sum+=nums[i];
+        if(sum < 0)sum=0;
+        if(sum > maximumSum) {
+            ansEnd = i;
+            ansStart = start;
+            maximumSum = sum;
+        }
+    }
+
+    return {ansStart, ansEnd};
+}
+
+
 int main(){
     vector<int> arr = {-2,1,-3,4,-1,2,1,-5,4};
-    int res = maximumSubArraySumOptimal(arr);
-    cout << res << endl;
+    // int res = maximumSubArraySumOptimal(arr);
+    // cout << res << endl;
+
+    vector<int> res = maximumSubArraySumOptimalArray(arr);
+    cout << res[0] << " " << res[1]  << endl;
 }
