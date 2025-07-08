@@ -31,7 +31,6 @@ void sortNumberBrute(vector<int> &nums){
 // better approach using extra array
 // time complexity : O(n)
 // space complexity : O(n)
-
 void sortNumberBetter(vector<int> &nums){
     int n= nums.size();
     vector<int> res(n);
