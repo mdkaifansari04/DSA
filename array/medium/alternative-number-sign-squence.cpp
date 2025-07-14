@@ -56,6 +56,21 @@ void sortNumberBetter(vector<int> &nums){
     } 
 }
 
+/*
+ idea is to make two pos and neg array in order to store the pos and neg elements : wh ywe do this because may have inequal number of elements (maybe pos element are more then negative and vice versa)
+ time complexity : 
+            - main array O(n)
+            - another check array till smaller array O(s)
+            - another array bigger - smaller which is rest O(b)
+            - smaller + (rest)  = whole array
+            - O(n) = O(s) + O(b)
+            - another O(n)
+
+            - O(n) + O(n) == O(2n) == O(n)
+
+
+space complexity : O(n) [as both array size is equal as size of nums.size()]
+*/
 void sortNumberOptimalForNonEqualNumber(vector<int> &nums)
 {
     int n =nums.size();
@@ -70,18 +85,21 @@ void sortNumberOptimalForNonEqualNumber(vector<int> &nums)
         }
     }
 
+    // the smaller will be selected and based on that we store the element at the main array with the logic of division that odd index contains the negative number and even index contains positive number
     if(pos.size() > neg.size()){
         for(int i=0; i<neg.size(); i++){
-            nums[i*2] = pos[i];
-            nums[(i*2)+1] = neg[i];
+            nums[i*2] = pos[i]; // even index contains the positive number 
+            nums[(i*2)+1] = neg[i]; // odd index contains the negative number
         }
 
-        int index = neg.size()+1;
+        // then store all the rest number 
+        int index = neg.size()+1; // we started from neg array size +1 as we know we have nt just stored the positive but also negative nums[(i*2)+1] at +1 index so we started with +1
         for(int i=pos.size() - neg.size(); i<pos.size(); i++){
-            nums[index] = pos[i];
+            nums[index] = pos[i]; // store the rest elements in the main array
             index++;
         }
     }else{
+        // same logic
         for(int i=0; i<pos.size(); i++){
             nums[i*2] = pos[i];
             nums[(i*2)+1] = neg[i];
@@ -93,7 +111,6 @@ void sortNumberOptimalForNonEqualNumber(vector<int> &nums)
             index++;
         }
     }
-
 
 }
 
