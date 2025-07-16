@@ -21,6 +21,9 @@ vector<int> reverseArray(vector<int> &nums){
     return temp;
 }
 
+// my implemented solution : which is working fine.
+// time complexity : O(n) + O(n) + O(nlogn)
+// space complexity : O(1)
 
 vector<int> getNextPermutationOptimal (vector<int> &nums){
     int n = nums.size();
@@ -44,6 +47,35 @@ vector<int> getNextPermutationOptimal (vector<int> &nums){
 
     swap(nums[index], nums[closestGreatest]);
 
+    sort(nums.begin()+index+1, nums.begin()+n);
+    return nums;
+}
+
+//striver solution: which is quite clear 
+vector<int> getNextPermutationOptimalStriver (vector<int> &nums){
+    int n = nums.size();
+
+    //finding the break point where the elements are smaller then from a flow. if yes then store the index
+    int index = -1;
+    for(int i=n-2; i>0; i--){
+        if(nums[i] < nums[i+1]){
+            index = i; break;
+        }
+    }
+
+    // if we dont find any number which is smaller from the reverse order checking. then the number is actually the highest number so the next permutation will be the initial number (which can be found by reversing)
+    if(index == -1) return reverseArray(nums);
+
+
+    // find the first greatest and then swap and break, this ensures that the you dont take the anther greatest. 
+    for (int i=n; i>index; i--){
+        if(nums[i] > nums[index]){
+            swap(nums[index], nums[index]);
+            break;
+        }
+    }
+
+    // sort the element after the break point.
     sort(nums.begin()+index+1, nums.begin()+n);
     return nums;
 }
