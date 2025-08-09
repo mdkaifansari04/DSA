@@ -1,4 +1,6 @@
 #include<iostream>
+#include<algorithm>
+
 using namespace std;
 
 bool linearSearch (vector <int> &arr, int num){
@@ -27,8 +29,38 @@ int longestConsecutiveNumberLengthBrute(vector <int> &nums){
     return longest;
 }
 
+
+int longestConsecutiveNumberLengthBetter(vector <int> &nums){
+    int n=nums.size();
+    int longest = 1;
+    sort(nums.begin(), nums.end());
+
+    int i = 0;
+    int j=i+1;
+    int count = 1;
+    for(auto i:nums) cout<< i << " ";
+    while(i<n){
+        if(nums[j] > nums[i]) {
+            if(nums[i]+1 == nums[j]) {
+                count+=1;
+            }else{
+                count = 1;
+            }
+            longest = max(count, longest);
+            i=j;
+        }
+        j++;
+    }
+
+    return longest;
+}
+
+
+
 int main(){
-    vector<int>arr={102,4,100,1,101,3,2,1,1};
-    int n = longestConsecutiveNumberLengthBrute(arr);
+    vector<int>arr={100,102,100,101,101,4,3,2,3,2,1,1,1,2};
+
+    int n = longestConsecutiveNumberLengthBetter(arr);
+    cout<< endl;
     cout << n ;
 }
