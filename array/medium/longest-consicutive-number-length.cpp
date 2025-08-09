@@ -12,6 +12,9 @@ bool linearSearch (vector <int> &arr, int num){
     return isFound;
 }
 
+// brute approach 
+// time complexity : near about O(n) sq
+// space complexity : O(1)
 int longestConsecutiveNumberLengthBrute(vector <int> &nums){
     int n=nums.size();
     int longest = 1;
@@ -29,27 +32,25 @@ int longestConsecutiveNumberLengthBrute(vector <int> &nums){
     return longest;
 }
 
+//better approach 
+// time complexity : O(n) + O(n log n)
+// space complexity : O(1)
 
 int longestConsecutiveNumberLengthBetter(vector <int> &nums){
-    int n=nums.size();
-    int longest = 1;
+    if(nums.empty()) return 0;
     sort(nums.begin(), nums.end());
 
-    int i = 0;
-    int j=i+1;
+    int longest = 1;
     int count = 1;
-    for(auto i:nums) cout<< i << " ";
-    while(i<n){
-        if(nums[j] > nums[i]) {
-            if(nums[i]+1 == nums[j]) {
-                count+=1;
-            }else{
-                count = 1;
-            }
-            longest = max(count, longest);
-            i=j;
+
+    for(int i=1; i<nums.size(); i++){
+        if(nums[i] == nums[i-1]) continue;
+        if(nums[i] == nums[i-1] +1) {
+            count ++;
+        }else{
+            count = 1;
         }
-        j++;
+        longest = max(count, longest);
     }
 
     return longest;
