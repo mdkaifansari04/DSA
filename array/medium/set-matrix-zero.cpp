@@ -13,15 +13,16 @@ void setRowsColsToZero (vector<vector<int>> &nums, int rows, int cols, int desir
 }
 
 // brute force solution
-// time complexity : O(n)^4 or O(m^2 x n^2)
+// time complexity : O(n*m) * O(n+m) * O(n*m)
 // space complexity : O(n)
+
 void setMatrixToZeroBrute(vector<vector<int>> &nums, int rows, int cols){
     // I was using this temp array to make the rows and cols as zero so that we dont get confused with the original zero and changes zeros
     // vector<vector<int>> arr = nums;
-    for (int i=0; i<rows; i++){
+    for (int i=0; i<rows; i++){ // n*m
         for (int j=0; j<cols; j++){
             if(nums[i][j] == 0){
-                 setRowsColsToZero(nums, rows, cols, i, j);
+                 setRowsColsToZero(nums, rows, cols, i, j); // n+m
             }
         }
     }
@@ -36,6 +37,31 @@ void setMatrixToZeroBrute(vector<vector<int>> &nums, int rows, int cols){
     }
 }
 
+// better solution 
+// time complexity : O(n x m) + O(n x m) = O(n x m)
+// space complexity : O(m) + O(n)
+void setMatrixToZeroBetter(vector<vector<int>> &nums, int rows, int cols){
+    vector<int>rowsToBeZero(rows, 0),colToBeZero(cols, 0);
+
+    for (int i=0; i<rows; i++){
+        for(int j=0; j<cols; j++){
+            if(nums[i][j] == 0) {
+                rowsToBeZero[i] = 1;
+                colToBeZero[i] = 1;
+            }
+        }
+    }
+
+    for (int i=0; i<rows; i++){
+        for(int j=0; j<cols; j++){
+            if(rowsToBeZero[i] == 1 || colToBeZero[j] == 1) {
+                nums[i][j] = 0;
+            }
+        }
+    }
+
+}
+
 
 int main(){
     int rows=4, cols = 4;
@@ -45,7 +71,7 @@ int main(){
     {1, 1, 0,1},
     {1, 1, 1,1},
     };
-    setMatrixToZeroBrute(arr, rows, cols);
+    setMatrixToZeroBetter(arr, rows, cols);
     for (int i=0; i<rows; i++){
         for (int j=0; j<cols; j++){
             cout << arr[i][j] << " " ;
