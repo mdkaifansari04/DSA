@@ -58,6 +58,40 @@ void traverseMatrixSpiral (vector<vector<int>> &matrix){
     
 }
 
+void traverseMatrixSpiralStriver(vector<vector<int>> &matrix){
+    int m= matrix.size(), n = matrix[0].size();
+    int top = 0, bottom = m-1, right = n-1, left =0;
+    vector<int> arr;
+    while(left <=right && top <=bottom){
+
+        // right direction
+        for(int i=left; i<=right; i++){
+            arr.push_back(matrix[top][i]);
+        }   
+        top ++;
+        // bottom
+        for (int i=top; i<=bottom; i++){
+            arr.push_back(matrix[i][right]);
+        }   
+        right --;
+
+        // left
+        for(int i=right; i>=left; i--){
+            arr.push_back(matrix[bottom][i]);
+        }
+        bottom --;
+
+        // top
+        for(int i=bottom; i>=top; i--){
+            arr.push_back(matrix[i][left]);
+        }
+        left ++;
+    }
+
+    for(auto i:arr){
+        cout<< i << " ";
+    }
+}
 
 
 int main(){
@@ -70,7 +104,6 @@ int main(){
     { 16, 15, 14, 13, 12, 11 }//  5
     };
 
-    traverseMatrixSpiral(arr);
-
+    traverseMatrixSpiralStriver(arr);
 
 }
