@@ -58,10 +58,14 @@ void traverseMatrixSpiral (vector<vector<int>> &matrix){
     
 }
 
-void traverseMatrixSpiralStriver(vector<vector<int>> &matrix){
+vector<int> traverseMatrixSpiralStriver(vector<vector<int>> &matrix){
     int m= matrix.size(), n = matrix[0].size();
     int top = 0, bottom = m-1, right = n-1, left =0;
     vector<int> arr;
+    if(n==1){   
+        for(int i=0; i<m; i++) arr.push_back(matrix[i][0]);
+        return arr;
+    }
     while(left <=right && top <=bottom){
 
         // right direction
@@ -76,34 +80,88 @@ void traverseMatrixSpiralStriver(vector<vector<int>> &matrix){
         right --;
 
         // left
-        for(int i=right; i>=left; i--){
-            arr.push_back(matrix[bottom][i]);
+        if(top <=bottom)
+        {
+            for(int i=right; i>=left; i--){
+                arr.push_back(matrix[bottom][i]);
+            }
+            bottom --;
         }
-        bottom --;
-
+        
         // top
-        for(int i=bottom; i>=top; i--){
-            arr.push_back(matrix[i][left]);
+        if(left<=right)
+        {
+            for(int i=bottom; i>=top; i--){
+                arr.push_back(matrix[i][left]);
+            }
+            left ++;
         }
-        left ++;
     }
-
-    for(auto i:arr){
-        cout<< i << " ";
-    }
+    return arr;
 }
 
 
+// implemented by own after one day.
+vector<int> spiralTraversal(vector<vector<int>> &matrix){
+    int n=matrix.size(), m =matrix[0].size();
+    vector<int> arr;
+
+    // the edge case if the 
+    // if(m == 1){ 
+    //     for (int i=0; i<n; i++){
+    //         arr.push_back(matrix[i][0]);
+    //         return arr;
+    //     }
+    // }
+
+    int top = 0, left=0, right=m-1, bottom =n-1;
+
+    while(left <=right && top <=bottom){
+
+        //right range 
+        for(int i=left; i<=right; i++){
+            arr.push_back(matrix[top][i]);
+        }
+        top ++;
+
+
+        // bottom : this loop doesn't have any effect if the top is incremented and we have a one row, example 
+        //                  left
+        //                   |
+        // --> top, bottom {{1,2,3,4}} <--- right
+        // --> top   (if the top is incremented by the bottom after the first iteration, then we need not contraint or condition before running this below loop)
+
+        for(int i =top; i<=bottom; i++){
+            arr.push_back(matrix[i][right]);
+        }
+        right --;
+
+        // left : side of operation where we use bottom pointer as reference and make sure that bottom was not incremented by top in previous operations. (though checking those values)
+        if(top <= bottom){
+            for(int i=right; i>=left; i--){
+                arr.push_back(matrix[bottom][i]);
+            }
+            bottom --;
+        }
+
+        // top : operation needs left pointer so making sure if this is valid means left <= right then only do
+        if(left<=right){
+            for(int i=bottom; i>=top; i--){
+                arr.push_back(matrix[i][left]);
+            }
+            left++;
+        }
+    }
+    return arr;
+}
 int main(){
     vector<vector<int>> arr= {
-    {  1,  2,  3,  4,  5,  6 },// 0
-    { 20, 21, 22, 23, 24,  7 },// 1
-    { 19, 32, 33, 34, 25,  8 },// 2
-    { 18, 31, 36, 35, 26,  9 },// 3
-    { 17, 30, 29, 28, 27, 10 },// 4`
-    { 16, 15, 14, 13, 12, 11 }//  5
+    {  1,  2 },
+    { 10,  3 },
+    {  9,  4 },
+    {  8,  5 },
+    {  7,  6 }
     };
-
-    traverseMatrixSpiralStriver(arr);
-
+    vector<int> res = spiralTraversal(arr);
+    for(auto i:res) cout << i << " ";
 }
