@@ -154,14 +154,57 @@ vector<int> spiralTraversal(vector<vector<int>> &matrix){
     }
     return arr;
 }
+
+//todo : pending ask anyone 
+vector<int> reverseSpiral (vector<vector<int>> &matrix){
+
+    int n = matrix.size(), m = matrix[0].size();
+    vector<int> arr;
+    int bottom, top = bottom = floor((n-1) /2);
+    int right = floor((n-1)/2);
+    int left = right-1;
+
+    while(left>=0  && top>=0 && right <=m-1 && bottom <=n-1){
+        // left
+        for(int i=right; i>=left; i--){
+            arr.push_back(matrix[top][i]);
+        }   
+        bottom ++;
+
+        // bottom 
+        for(int i=top+1; i<=bottom; i++){
+            arr.push_back(matrix[i][left]);
+        }
+        right ++;
+
+        // right 
+        for(int i=left+1; i<=right; i++){
+            arr.push_back(matrix[bottom][i]);
+        }
+        top --;
+
+        cout << "top: " << top << "bottom :" << bottom<< endl;
+        //top 
+        for(int i=bottom-1; i>=top; i--){
+            arr.push_back(matrix[i][right]);
+        }
+        left --;
+
+        cout << "left: " << left << " right :" <<right << endl;
+    }
+
+    return arr;
+}
+
+
 int main(){
     vector<vector<int>> arr= {
-    {  1,  2 },
-    { 10,  3 },
-    {  9,  4 },
-    {  8,  5 },
-    {  7,  6 }
+    {17, 18, 19, 20, 21},
+    {16,  5,  6,  7, 22},
+    {15,  4,  1,  8, 23},
+    {14,  3,  2,  9, 24},
+    {13, 12, 11, 10, 25}
     };
-    vector<int> res = spiralTraversal(arr);
+    vector<int> res = reverseSpiral(arr);
     for(auto i:res) cout << i << " ";
 }
