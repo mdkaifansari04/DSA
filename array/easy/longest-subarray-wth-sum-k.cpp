@@ -33,6 +33,8 @@ vector<int> longestSubArrayBrute(vector<int> &nums, int k){
    return longestArray;
 }   
 
+/*
+ incomplete sol : dont consider
 vector<int> longestSubArrayBetter(vector<int> &nums, int k){
     int n = nums.size();
     int start =0;
@@ -62,6 +64,7 @@ vector<int> longestSubArrayBetter(vector<int> &nums, int k){
 // time complexity : O(2n)
 // space complexity : O(1)
 
+*/
 int longestSubArrayOptimal(vector<int> &nums, int k){
     int n=nums.size();
     int i=0;
