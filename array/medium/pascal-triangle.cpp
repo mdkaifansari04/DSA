@@ -1,28 +1,6 @@
 #include<iostream>
 using namespace std;
 
-// ! this wont work as expected.
-// brute approach
-// time complexity : O(n)
-// space complexity : approx O(n) 
-vector<vector<int>> generatePascalTriangleBrute(int numRows) {
-    vector<vector<int>> arr;
-    int m=0, n=1;
-
-    for(int i=0; i<numRows; i++){
-        arr.push_back(vector<int>(i, 1));
-        for(int j=0; j<i; j++){
-              cout << "ith :" << i << endl;
-                if(j==0) arr[i][j] = 1;
-                else if(j==i) arr[i][j] = 1;
-                else {
-                    arr[i][j] = arr[i-1][j-1] + arr[i-1][j];
-                }
-        }
-    }
-    return arr;
-}   
-
 //* Given R and C find the element at that position
 // time complexity : O(c)
 // space complexity : O(1)
@@ -37,6 +15,8 @@ long findElementAtPosition (int r, int c){
     }
     return res;
 }
+
+
 
 //* given the row number, find the entire row of pascal triangle
 // this is the optimal approach
@@ -53,6 +33,18 @@ vector<int> getPascalTriangleRow(int rowNumber){
     }
     return arr;
 }
+
+// optimal approach: by using the get row element
+// time complexity : O(n) sq
+// space complexity : approx O(n sq) if we return array if we print then O(1)
+vector<vector<int>> generatePascalTriangleOptimal(int numRows) {
+    vector<vector<int>> ans;
+
+    for(int i=1; i<=numRows; i++){
+        ans.push_back(getPascalTriangleRow(i));
+    }
+    return ans;
+}   
 
 //* given the number of rows, create the entire pascal triangle
 vector<vector<int>> generatePascalTriangleOptimal(int numOfRows){
@@ -72,24 +64,25 @@ vector<vector<int>> generatePascalTriangleOptimal(int numOfRows){
     return arr;
 }
 int main(){
-    // int numRow=6;
-    // vector<vector<int>> arr = generatePascalTriangleBrute(numRow);
+    int numRow=6;
+    vector<vector<int>> arr = generatePascalTriangleOptimal(numRow);
 
-    // for(int i=0; i<numRow; i++){
-    //     for(int j=0; j<i; j++){
-    //         cout << arr[i][j] << " ";
-    //     }
-    //     cout << endl;
-    // }
+    for(auto it:arr){
+        for(auto ele:it){
+            cout << ele << " ";
+        }
+        cout << endl;
+    }
 
-    // int res = findElementAtPosition(5,3);
+    // int res = findElementAtPosition(3,2);
     // cout << res;
 
-    vector<vector<int>> res = generatePascalTriangleOptimal(5);
-    for(int i=0; i<5; i++){
-        for(int j=0; j<i; j++){
-            cout << res[i][j] << " ";
-        }
-        cout<< endl;
-    }
+    // optimal pascal triangle
+    // vector<vector<int>> res = generatePascalTriangleOptimal(5);
+    // for(int i=0; i<5; i++){
+    //     for(int j=0; j<i; j++){
+    //         cout << res[i][j] << " ";
+    //     }
+    //     cout<< endl;
+    // }
 }
