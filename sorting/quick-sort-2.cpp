@@ -17,13 +17,17 @@ int findPivot(int arr[], int low, int high){
         while(i<j){
             // if the ith element is lesser we dont do any thing, go on [as we want that the element lesser should be at left]
             while(arr[i]<=arr[pivotIndex] && i<=high-1)i++;
-            // if the jth elemnet is bigger no issue, go on to left side, if not then come out
+            // if the jth elemnet is bigger no issue, go on to left side till the time you find the lesser element then pivot 
             while(arr[j]>=arr[pivotIndex] && j>=low+1)j--;
+
+            //* as the logic says that every element at the left side of pivot should be smaller and at the right side it should be greater
 
             // the element which is at the position where [i does not cross each other, we need to swap bo the elements and place it in its correct position]
             if(i<j) swap(arr[i], arr[j]);
         }
         // if j cross i [while loop will be break, and the position will be swap with the pivot element, with the j]
+        //* we dont care for the element of left or right side of pivot index, if it is sorted or not we just care if the pivot is at the correct position.
+        // as after recursive call every element will become pivot one time and then get it's correct position.
         swap(arr[pivotIndex], arr[j]);
         return j; // return the pivot position now, which will be partition index.
 }
